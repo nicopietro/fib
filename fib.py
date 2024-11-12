@@ -1,4 +1,5 @@
 import argparse
+from functools import cache
 
 def fibonacci(n: int):
     if n < 0:
@@ -13,19 +14,13 @@ def fibonacci(n: int):
         n1 = nth
     return nth
 
-
-cache = {}
-
-
+@cache
 def fibonacci_recursive(n: int):
     if n < 0:
         raise ValueError("n must be greater or equal to zero.")
     if n < 2:
         return n
-    if n in cache:
-        return cache[n]
     nth = fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2)
-    cache[n] = nth
     return nth
 
 
